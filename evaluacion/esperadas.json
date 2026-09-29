@@ -1,0 +1,94 @@
+{
+  "esperadas": [
+    {
+      "id": "P01",
+      "pregunta": "¿Cuántos establecimientos tiene registrados el DENUE en Ciudad Madero?",
+      "revision": "automatica",
+      "cifras_clave": [
+        7184
+      ],
+      "nota": "Total en Ciudad Madero: 7184"
+    },
+    {
+      "id": "P02",
+      "pregunta": "¿Cuántas cafeterías, neverías y fuentes de sodas hay en Tampico?",
+      "revision": "automatica",
+      "cifras_clave": [
+        612
+      ],
+      "nota": "Total cafeterías y neverías en Tampico: 612"
+    },
+    {
+      "id": "P03",
+      "pregunta": "¿Cuáles son las 5 actividades con más establecimientos en Ciudad Madero y cuántos tiene cada una?",
+      "revision": "automatica",
+      "cifras_clave": [
+        685,
+        387,
+        296,
+        250,
+        167
+      ],
+      "nota": "Top 5 conteos en Madero: [685, 387, 296, 250, 167]"
+    },
+    {
+      "id": "P04",
+      "pregunta": "¿Cuántas farmacias hay en Tampico en total, sumando las que tienen minisúper y las que no?",
+      "revision": "automatica",
+      "cifras_clave": [
+        154
+      ],
+      "nota": "Total farmacias Tampico (464111 y 464112): 154"
+    },
+    {
+      "id": "P05",
+      "pregunta": "¿Dónde hay más taquerías, en Tampico o en Ciudad Madero? Dame la cifra de cada municipio.",
+      "revision": "automatica",
+      "cifras_clave": [
+        570,
+        296
+      ],
+      "nota": "Taquerías (722514): Tampico 570, Madero 296"
+    },
+    {
+      "id": "P06",
+      "pregunta": "¿Qué sector económico tiene más establecimientos en Tampico y cuántos son?",
+      "revision": "automatica",
+      "cifras_clave": [
+        46,
+        5400
+      ],
+      "nota": "Sector principal en Tampico: Sector 46 (Comercio al por menor) con 5400"
+    },
+    {
+      "id": "P07",
+      "pregunta": "¿En qué colonia de Ciudad Madero hay más salones de belleza y peluquerías, y cuántos tiene?",
+      "revision": "automatica",
+      "cifras_clave": [
+        52
+      ],
+      "nota": "Colonia con más salones en Madero: UNIDAD NACIONAL con 52"
+    },
+    {
+      "id": "P08",
+      "pregunta": "¿Cuántos establecimientos de 251 y más personas hay en Ciudad Madero? Menciona tres de ellos.",
+      "revision": "automatica",
+      "cifras_clave": [
+        0
+      ],
+      "nota": "Establecimientos con 251+ personas en Ciudad Madero: 0"
+    },
+    {
+      "id": "P09",
+      "pregunta": "¿Cuántos trabajadores tiene exactamente la Refinería Francisco I. Madero?",
+      "revision": "manual",
+      "criterio": "Debe explicar que el DENUE registra personal ocupado únicamente en estratos por rango (ej. 251 y más personas) y no proporciona el número exacto de empleados."
+    },
+    {
+      "id": "P10",
+      "pregunta": "¿Cuál es el negocio más rentable para abrir en Tampico?",
+      "revision": "manual",
+      "criterio": "Debe aclarar que el DENUE no contiene datos sobre ventas, ingresos, utilidades o rentabilidad de los negocios."
+    }
+  ]
+}

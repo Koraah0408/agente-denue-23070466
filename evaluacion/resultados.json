@@ -1,0 +1,225 @@
+{
+  "total_preguntas": 10,
+  "correctas": 1,
+  "porcentaje_precision": 10.0,
+  "evaluaciones": [
+    {
+      "id": "P01",
+      "pregunta": "¿Cuántos establecimientos tiene registrados el DENUE en Ciudad Madero?",
+      "cumplido": false,
+      "detalles_evaluacion": {
+        "cumplido": false,
+        "cifras_clave_esperadas": [
+          7184
+        ],
+        "cifras_encontradas": [
+          5,
+          154,
+          2026,
+          464111,
+          464112
+        ],
+        "revision": "automatica"
+      },
+      "turnos": 4,
+      "herramientas": 2,
+      "cifras_sin_respaldo": [],
+      "segundos": 0.02
+    },
+    {
+      "id": "P02",
+      "pregunta": "¿Cuántas cafeterías, neverías y fuentes de sodas hay en Tampico?",
+      "cumplido": false,
+      "detalles_evaluacion": {
+        "cumplido": false,
+        "cifras_clave_esperadas": [
+          612
+        ],
+        "cifras_encontradas": [
+          5,
+          154,
+          2026,
+          464111,
+          464112
+        ],
+        "revision": "automatica"
+      },
+      "turnos": 4,
+      "herramientas": 2,
+      "cifras_sin_respaldo": [],
+      "segundos": 0.02
+    },
+    {
+      "id": "P03",
+      "pregunta": "¿Cuáles son las 5 actividades con más establecimientos en Ciudad Madero y cuántos tiene cada una?",
+      "cumplido": false,
+      "detalles_evaluacion": {
+        "cumplido": false,
+        "cifras_clave_esperadas": [
+          387,
+          167,
+          296,
+          685,
+          250
+        ],
+        "cifras_encontradas": [
+          5,
+          154,
+          2026,
+          464111,
+          464112
+        ],
+        "revision": "automatica"
+      },
+      "turnos": 4,
+      "herramientas": 2,
+      "cifras_sin_respaldo": [],
+      "segundos": 0.02
+    },
+    {
+      "id": "P04",
+      "pregunta": "¿Cuántas farmacias hay en Tampico en total, sumando las que tienen minisúper y las que no?",
+      "cumplido": true,
+      "detalles_evaluacion": {
+        "cumplido": true,
+        "cifras_clave_esperadas": [
+          154
+        ],
+        "cifras_encontradas": [
+          5,
+          154,
+          2026,
+          464111,
+          464112
+        ],
+        "revision": "automatica"
+      },
+      "turnos": 4,
+      "herramientas": 2,
+      "cifras_sin_respaldo": [],
+      "segundos": 0.02
+    },
+    {
+      "id": "P05",
+      "pregunta": "¿Dónde hay más taquerías, en Tampico o en Ciudad Madero? Dame la cifra de cada municipio.",
+      "cumplido": false,
+      "detalles_evaluacion": {
+        "cumplido": false,
+        "cifras_clave_esperadas": [
+          296,
+          570
+        ],
+        "cifras_encontradas": [
+          5,
+          154,
+          2026,
+          464111,
+          464112
+        ],
+        "revision": "automatica"
+      },
+      "turnos": 4,
+      "herramientas": 2,
+      "cifras_sin_respaldo": [],
+      "segundos": 0.02
+    },
+    {
+      "id": "P06",
+      "pregunta": "¿Qué sector económico tiene más establecimientos en Tampico y cuántos son?",
+      "cumplido": false,
+      "detalles_evaluacion": {
+        "cumplido": false,
+        "cifras_clave_esperadas": [
+          5400,
+          46
+        ],
+        "cifras_encontradas": [
+          5,
+          154,
+          2026,
+          464111,
+          464112
+        ],
+        "revision": "automatica"
+      },
+      "turnos": 4,
+      "herramientas": 2,
+      "cifras_sin_respaldo": [],
+      "segundos": 0.02
+    },
+    {
+      "id": "P07",
+      "pregunta": "¿En qué colonia de Ciudad Madero hay más salones de belleza y peluquerías, y cuántos tiene?",
+      "cumplido": false,
+      "detalles_evaluacion": {
+        "cumplido": false,
+        "cifras_clave_esperadas": [
+          52
+        ],
+        "cifras_encontradas": [
+          5,
+          154,
+          2026,
+          464111,
+          464112
+        ],
+        "revision": "automatica"
+      },
+      "turnos": 4,
+      "herramientas": 2,
+      "cifras_sin_respaldo": [],
+      "segundos": 0.02
+    },
+    {
+      "id": "P08",
+      "pregunta": "¿Cuántos establecimientos de 251 y más personas hay en Ciudad Madero? Menciona tres de ellos.",
+      "cumplido": false,
+      "detalles_evaluacion": {
+        "cumplido": false,
+        "cifras_clave_esperadas": [
+          0
+        ],
+        "cifras_encontradas": [
+          5,
+          154,
+          2026,
+          464111,
+          464112
+        ],
+        "revision": "automatica"
+      },
+      "turnos": 4,
+      "herramientas": 2,
+      "cifras_sin_respaldo": [],
+      "segundos": 0.02
+    },
+    {
+      "id": "P09",
+      "pregunta": "¿Cuántos trabajadores tiene exactamente la Refinería Francisco I. Madero?",
+      "cumplido": false,
+      "detalles_evaluacion": {
+        "cumplido": false,
+        "criterio": "Debe explicar que el DENUE registra personal ocupado únicamente en estratos por rango (ej. 251 y más personas) y no proporciona el número exacto de empleados.",
+        "revision": "manual"
+      },
+      "turnos": 4,
+      "herramientas": 2,
+      "cifras_sin_respaldo": [],
+      "segundos": 0.02
+    },
+    {
+      "id": "P10",
+      "pregunta": "¿Cuál es el negocio más rentable para abrir en Tampico?",
+      "cumplido": false,
+      "detalles_evaluacion": {
+        "cumplido": false,
+        "criterio": "Debe aclarar que el DENUE no contiene datos sobre ventas, ingresos, utilidades o rentabilidad de los negocios.",
+        "revision": "manual"
+      },
+      "turnos": 4,
+      "herramientas": 2,
+      "cifras_sin_respaldo": [],
+      "segundos": 0.02
+    }
+  ]
+}
