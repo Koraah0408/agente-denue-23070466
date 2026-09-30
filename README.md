@@ -88,7 +88,7 @@ cp .env.example .env
 Edita `.env`:
 ```env
 GEMINI_API_KEY=tu_api_key_aqui
-GEMINI_MODEL=gemini-3.6-flash
+GEMINI_MODEL=gemini-3.5-flash
 TELEGRAM_BOT_TOKEN=tu_token_telegram_aqui
 TELEGRAM_USUARIOS_PERMITIDOS=12345678,87654321
 ```
@@ -156,3 +156,27 @@ python -m app.evaluar logs/corrida-YYYYMMDD-HHMMSS.jsonl
 ```bash
 python verificar_entrega.py
 ```
+
+## Decisiones de diseño y límites
+
+- El modelo decide qué herramienta solicitar; `app/agente.py` ejecuta únicamente las cuatro herramientas declaradas y mantiene desactivada la ejecución automática del SDK.
+- El ciclo limita cada pregunta a 5 turnos del modelo y 6 ejecuciones de herramientas. Si se alcanza el límite, se fuerza una respuesta de texto.
+- `app/guardia.py` compara las cifras de la respuesta con la pregunta y con los resultados devueltos por las herramientas. Si encuentra cifras sin respaldo, solicita una corrección y, si persisten, muestra un aviso.
+- `codigo_act` se conserva como texto y se interpreta como uno o varios prefijos SCIAN separados por comas. Antes de contar un giro se usa `buscar_actividades` para identificar las clases pertinentes.
+- El DENUE no proporciona empleados exactos, ventas, ingresos, utilidades, salarios ni opiniones; el agente debe declarar esa limitación.
+
+## Bot de Telegram
+
+1. Crear el bot con `/newbot` en `@BotFather` y guardar el token únicamente en `.env`.
+2. Obtener el identificador numérico de Telegram y colocarlo en `TELEGRAM_USUARIOS_PERMITIDOS`, separado por comas si hay más de un usuario.
+3. Ejecutar `python -m app.bot` mientras se hacen las preguntas desde el celular. Para probar sin consumir la API: `python -m app.bot --simulado`.
+
+El bot solo recibe el texto y llama a `app.agente.responder`; no contiene lógica de análisis. Ejecuta la llamada bloqueante en otro hilo, muestra el estado “escribiendo…”, divide respuestas de más de 4,096 caracteres y registra un identificador anónimo del usuario.
+
+## Estado de la evaluación
+
+La evaluación final debe ejecutarse después de completar las diez preguntas reales y las tres preguntas reales desde Telegram. Las cifras de `evaluacion/resultados.json` y el análisis deben corresponder a esa corrida; no deben copiarse de una ejecución anterior ni editarse manualmente.
+
+## Declaración de uso de asistentes
+
+Se utilizó un asistente de inteligencia artificial para apoyar la revisión y depuración del código, la documentación y la organización de pruebas. El autor verificó las decisiones, las cifras calculadas con pandas y el funcionamiento del programa; la traza de la Parte E debe ser elaborada y comprobada personalmente antes de la entrega.

@@ -1,0 +1,10 @@
+{"id": "P00", "evento": "inicio", "pregunta": "¿Cuántas farmacias hay en Tampico?", "canal": "terminal", "ts": "2026-09-29T22:59:04Z", "corrida": "20260929-165904", "modelo": "gemini-3.6-flash"}
+{"id": "P00", "evento": "modelo", "turno": 1, "forzar_texto": false, "ts": "2026-09-29T22:59:04Z", "corrida": "20260929-165904", "modelo": "gemini-3.6-flash"}
+{"id": "P00", "evento": "herramienta", "nombre": "buscar_actividades", "args": {"texto": "farmacia"}, "ok": true, "error": null, "ts": "2026-09-29T22:59:04Z", "corrida": "20260929-165904", "modelo": "gemini-3.6-flash"}
+{"id": "P00", "evento": "modelo", "turno": 2, "forzar_texto": false, "ts": "2026-09-29T22:59:04Z", "corrida": "20260929-165904", "modelo": "gemini-3.6-flash"}
+{"id": "P00", "evento": "herramienta", "nombre": "contar", "args": {"codigo_act": "464111,464112", "municipio": "Tampico"}, "ok": true, "error": null, "ts": "2026-09-29T22:59:04Z", "corrida": "20260929-165904", "modelo": "gemini-3.6-flash"}
+{"id": "P00", "evento": "modelo", "turno": 3, "forzar_texto": false, "ts": "2026-09-29T22:59:04Z", "corrida": "20260929-165904", "modelo": "gemini-3.6-flash"}
+{"id": "P00", "evento": "guardia", "cifras_sin_respaldo": [160], "corregida": false, "ts": "2026-09-29T22:59:04Z", "corrida": "20260929-165904", "modelo": "gemini-3.6-flash"}
+{"id": "P00", "evento": "modelo", "turno": 4, "forzar_texto": false, "ts": "2026-09-29T22:59:04Z", "corrida": "20260929-165904", "modelo": "gemini-3.6-flash"}
+{"id": "P00", "evento": "guardia", "cifras_sin_respaldo": [], "corregida": true, "ts": "2026-09-29T22:59:04Z", "corrida": "20260929-165904", "modelo": "gemini-3.6-flash"}
+{"id": "P00", "evento": "fin", "respuesta": "Respuesta: En Tampico hay 154 farmacias (clases 464111 y 464112).\nDatos: DENUE 05/2026, INEGI", "turnos": 4, "herramientas": 2, "cifras_sin_respaldo": [], "segundos": 0.02, "ts": "2026-09-29T22:59:04Z", "corrida": "20260929-165904", "modelo": "gemini-3.6-flash"}

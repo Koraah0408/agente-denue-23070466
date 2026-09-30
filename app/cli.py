@@ -34,9 +34,12 @@ def main():
     herramientas = Herramientas(df, sectores)
 
     if args.simulado:
-        from app.modelo_simulado import llamar_modelo
+        from app.modelo_simulado import llamar_modelo, reset_simulado
+        reset_simulado()
+        modelo_nombre = "simulado"
     else:
         from app.modelo import llamar_modelo
+        modelo_nombre = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
 
     res = responder(
         pregunta=args.pregunta,
@@ -44,6 +47,7 @@ def main():
         sistema=sistema,
         llamar=llamar_modelo,
         canal="terminal",
+        modelo_nombre=modelo_nombre,
     )
 
     print("\n" + "=" * 60)

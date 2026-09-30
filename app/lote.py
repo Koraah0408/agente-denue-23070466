@@ -46,8 +46,10 @@ def main():
     if args.simulado:
         from app.modelo_simulado import llamar_modelo, reset_simulado
         reset_simulado()
+        modelo_nombre = "simulado"
     else:
         from app.modelo import llamar_modelo
+        modelo_nombre = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
 
     # Filter questions between --desde and --hasta
     ids = [p["id"] for p in preguntas]
@@ -79,6 +81,7 @@ def main():
                 bitacora_path=bitacora_path,
                 id_pregunta=p_id,
                 canal="lote",
+                modelo_nombre=modelo_nombre,
             )
             print(f"-> Terminado en {res['turnos']} turnos | Herramientas: {res['herramientas']} | Tiempo: {res['segundos']}s")
         except Exception as e:
@@ -91,7 +94,7 @@ def main():
                 "error": str(e),
                 "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                 "corrida": corrida_name,
-                "modelo": "simulado" if args.simulado else os.environ.get("GEMINI_MODEL", "gemini-3.6-flash"),
+                "modelo": modelo_nombre,
             }
             with open(bitacora_path, "a", encoding="utf-8") as f:
                 f.write(json.dumps(err_event, ensure_ascii=False) + "\n")

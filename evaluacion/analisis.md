@@ -72,3 +72,8 @@ Este documento presenta el análisis detallado del desempeño del Agente Analist
 ## 3. Conclusiones y Recomendaciones
 1. **Desempeño del Agente:** El agente logra responder con precisión todas las consultas apoyándose estrictamente en las herramientas deterministicas de consulta sobre Pandas.
 2. **Efectividad de la Guardia de Cifras:** Previene alucinaciones numéricas devolviendo alertas automáticas si el modelo intenta calcular sumas o porcentajes por su cuenta.
+## Estado de esta versiÃ³n
+
+La evidencia disponible todavÃ­a no es una evaluaciÃ³n final: `evaluacion/resultados.json` contiene eventos reales Ãºnicamente para P01-P05. Por eso registra 4/10 (40 %) y P06-P10 aparecen como no respondidas. Este porcentaje no debe presentarse como resultado definitivo; hay que regenerar los resultados despuÃ©s de completar las diez preguntas reales.
+
+Las conclusiones anteriores son una plantilla preliminar y contradicen el resultado actual; deben sustituirse por la tabla y el anÃ¡lisis de la corrida final antes de entregar.

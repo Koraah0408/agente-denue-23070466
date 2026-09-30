@@ -10,23 +10,22 @@ VALID_ESTRATOS = [
     "31 a 50 personas",
     "51 a 100 personas",
     "101 a 250 personas",
-    "251 y mas personas",
+    "251 y más personas",
 ]
-ESTRATO_RANK = {est: idx for idx, est in enumerate(reversed(VALID_ESTRATOS))}
 STOPWORDS = {"de", "del", "la", "las", "los", "y", "e", "o", "u", "en", "para", "por", "con", "sin"}
+
 
 def normalizar(texto: str) -> str:
     if not texto or not isinstance(texto, str):
         return ""
     texto = texto.lower()
-    # Normalize unicode NFKD and strip non-ASCII accents
     nfkd = unicodedata.normalize("NFKD", texto)
     ascii_text = "".join(c for c in nfkd if not unicodedata.combining(c) and ord(c) < 128)
-    # Remove punctuation
     cleaned = re.sub(r"[^\w\s]", " ", ascii_text)
-    # Filter stopwords and collapse spaces
-    words = [w for w in cleaned.split() if w not in STOPWORDS]
-    return " ".join(words)
+    return " ".join(w for w in cleaned.split() if w not in STOPWORDS)
+
+
+ESTRATO_RANK = {normalizar(est): idx for idx, est in enumerate(reversed(VALID_ESTRATOS))}
 
 def stem_word(w: str) -> str:
     w = normalizar(w)
@@ -120,17 +119,14 @@ class Herramientas:
                     "valores_validos": VALID_ESTRATOS,
                 }
             filtros_aplicados["estrato"] = found_est
-            sub_df = sub_df[sub_df["estrato"] == found_est]
+            sub_df = sub_df[sub_df["estrato"].map(normalizar) == normalizar(found_est)]
 
         # 5. Colonia
         if not ignorar_colonia and colonia is not None and str(colonia).strip():
             col_raw = str(colonia).strip()
             col_norm = normalizar(col_raw)
-            filtros_aplicados["colonia"] = col_raw
-            
             res_df = sub_df[sub_df["colonia_norm"] == col_norm]
             if res_df.empty:
-                # Find matching colonias containing the text
                 sug_colonias = sub_df[sub_df["colonia_norm"].str.contains(col_norm, regex=False, na=False)]["colonia"].unique()
                 sug_list = sorted(list(sug_colonias))[:10]
                 return None, None, {
@@ -138,6 +134,7 @@ class Herramientas:
                     "error": f"No se encontraron establecimientos en la colonia '{col_raw}' con los filtros aplicados",
                     "valores_validos": sug_list,
                 }
+            filtros_aplicados["colonia"] = res_df["colonia"].iloc[0]
             sub_df = res_df
 
         return sub_df, filtros_aplicados, None
@@ -199,6 +196,7 @@ class Herramientas:
         por=None,
     ) -> dict:
         valid_por = ["municipio", "colonia", "sector", "codigo_act", "estrato"]
+        por_val = None
         if por is not None and str(por).strip():
             por_val = str(por).strip()
             if por_val == "actividad":
@@ -209,38 +207,32 @@ class Herramientas:
                     "error": f"parametro 'por' invalido: '{por_val}'",
                     "valores_validos": valid_por,
                 }
-        else:
-            por_val = None
 
         sub_df, filtros, err = self._aplicar_filtros(municipio, codigo_act, sector, estrato, colonia)
         if err:
             return err
 
         if por_val:
-            grouped = sub_df.groupby(por_val).size().reset_index(name="total").sort_values(by="total", ascending=False)
-            filas = []
-            for _, r in grouped.iterrows():
-                val = r[por_val]
-                item = {"valor": val, "total": int(r["total"])}
-                if por_val == "codigo_act":
-                    act_rows = sub_df[sub_df["codigo_act"] == val]["actividad"]
-                    item["actividad"] = act_rows.iloc[0] if not act_rows.empty else ""
-                elif por_val == "sector":
-                    item["nombre_sector"] = self.sectores.get(val, "")
-                filas.append(item)
+            grouped = sub_df.groupby(por_val).size().reset_index(name="total")
+            grouped = grouped.sort_values(by="total", ascending=False)
+            filas = [
+                {"valor": row[por_val], "total": int(row["total"])}
+                for _, row in grouped.iterrows()
+            ]
             return {
                 "ok": True,
                 "fuente": "DENUE 05/2026, INEGI",
                 "por": por_val,
                 "filtros": filtros,
-                "total_filtrado": len(sub_df),
+                "total_filtrado": int(len(sub_df)),
                 "filas": filas,
             }
 
         return {
             "ok": True,
             "fuente": "DENUE 05/2026, INEGI",
-            "total_filtrado": len(sub_df),
+            "total": int(len(sub_df)),
+            "total_filtrado": int(len(sub_df)),
             "filtros": filtros,
         }
 
@@ -267,12 +259,16 @@ class Herramientas:
 
         try:
             top_val = int(top)
-            if top_val <= 0:
-                return {"ok": False, "error": "top debe ser mayor a 0"}
         except (ValueError, TypeError):
-            return {"ok": False, "error": "top invalido"}
-
-        top_val = min(20, top_val)
+            top_val = 5
+        if top_val < 1:
+            return {
+                "ok": False,
+                "error": "top debe ser mayor que 0",
+                "valores_validos": "1 a 20",
+            }
+        if top_val > 20:
+            top_val = 20
 
         sub_df, filtros, err = self._aplicar_filtros(
             municipio=municipio,
@@ -302,7 +298,7 @@ class Herramientas:
         for idx, r in enumerate(top_rows.iterrows(), 1):
             row_data = r[1]
             val = row_data[por_str]
-            item = {"posicion": idx, "valor": val, "total": int(row_data["total"])}
+            item = {"valor": val, "total": int(row_data["total"])}
             if por_str == "codigo_act":
                 act_rows = sub_df[sub_df["codigo_act"] == val]["actividad"]
                 item["actividad"] = act_rows.iloc[0] if not act_rows.empty else ""
@@ -340,12 +336,12 @@ class Herramientas:
 
         try:
             lim_val = int(limite)
-            if lim_val <= 0:
-                return {"ok": False, "error": "limite debe ser mayor a 0"}
         except (ValueError, TypeError):
-            return {"ok": False, "error": "limite invalido"}
-
-        lim_val = min(100, lim_val)
+            lim_val = 10
+        if lim_val < 1:
+            lim_val = 1
+        if lim_val > 20:
+            lim_val = 20
 
         sub_df, filtros, err = self._aplicar_filtros(municipio, codigo_act, sector, estrato, colonia)
         if err:
@@ -363,7 +359,7 @@ class Herramientas:
 
         # Sort: estrato rank (largest to smallest), then name
         sub_df = sub_df.copy()
-        sub_df["estrato_rank"] = sub_df["estrato"].map(lambda x: ESTRATO_RANK.get(x, 0))
+        sub_df["estrato_rank"] = sub_df["estrato"].map(lambda x: ESTRATO_RANK.get(normalizar(x), 0))
         sorted_df = sub_df.sort_values(by=["estrato_rank", "nombre"], ascending=[True, True])
 
         head_df = sorted_df.head(lim_val)
@@ -428,11 +424,7 @@ DECLARACIONES = [
                 },
                 "colonia": {
                     "type": "STRING",
-                    "description": "Nombre de la colonia.",
-                },
-                "por": {
-                    "type": "STRING",
-                    "description": "Opcional: agrupa resultados por 'municipio', 'colonia', 'sector', 'codigo_act' o 'estrato'.",
+                    "description": "Nombre de la colonia. Busca coincidencia exacta ya normalizada; si no hay filas, sugiere colonias parecidas.",
                 },
             },
         },

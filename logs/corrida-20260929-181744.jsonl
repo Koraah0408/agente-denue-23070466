@@ -1,0 +1,3 @@
+{"id": "TG-1", "evento": "inicio", "pregunta": "Cuántas tiendas de abarrotes hay en Tampico", "canal": "telegram", "usuario": "1700e1b3c3", "ts": "2026-09-30T00:18:23Z", "corrida": "20260929-181744", "modelo": "gemini-3.6-flash"}
+{"id": "TG-1", "evento": "modelo", "turno": 1, "forzar_texto": false, "ts": "2026-09-30T00:18:23Z", "corrida": "20260929-181744", "modelo": "gemini-3.6-flash"}
+{"id": "TG-1", "evento": "error", "error": "fallo al obtener respuesta del modelo", "ts": "2026-09-30T00:18:58Z", "corrida": "20260929-181744", "modelo": "gemini-3.6-flash"}

@@ -38,6 +38,7 @@ def responder(
     id_pregunta: str = "P00",
     canal: str = "terminal",
     usuario: str = None,
+    modelo_nombre: str = None,
 ) -> dict:
     t_inicio = time.time()
 
@@ -47,7 +48,7 @@ def responder(
         bitacora_path = os.path.join("logs", f"corrida-{fecha_str}.jsonl")
 
     corrida_name = os.path.basename(bitacora_path).replace(".jsonl", "").replace("corrida-", "")
-    modelo_name = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
+    modelo_name = modelo_nombre or os.environ.get("GEMINI_MODEL", "gemini-3.6-flash")
 
     def registrar_evento(evento: dict):
         evento["ts"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
