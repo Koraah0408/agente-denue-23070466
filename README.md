@@ -173,6 +173,10 @@ python verificar_entrega.py
 
 El bot solo recibe el texto y llama a `app.agente.responder`; no contiene lógica de análisis. Ejecuta la llamada bloqueante en otro hilo, muestra el estado “escribiendo…”, divide respuestas de más de 4,096 caracteres y registra un identificador anónimo del usuario.
 
+### Evidencia de Funcionamiento
+![Evidencia de conversación con el bot de Telegram](evidencia/telegram.png)
+
+
 ## Estado de la evaluación
 
 La evaluación final debe ejecutarse después de completar las diez preguntas reales y las tres preguntas reales desde Telegram. Las cifras de `evaluacion/resultados.json` y el análisis deben corresponder a esa corrida; no deben copiarse de una ejecución anterior ni editarse manualmente.
